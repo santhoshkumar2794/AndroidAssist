@@ -5,8 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomappbar.BottomAppBar
-import com.zestworks.assist.fragments.BottomAppBarFragment
-import com.zestworks.assist.fragments.FragmentConfig
+import com.zestworks.assist.fragments.bottomappbar.BottomAppBarFragment
+import com.zestworks.assist.fragments.bottomappbar.FragmentConfig
 import com.zestworks.assist.recyclerview.AdapterItem
 import com.zestworks.assist.recyclerview.DefaultAdapter
 import com.zestworks.assist.recyclerview.RecyclerAdapter
@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity() {
             "Bottom App Bar" -> {
                 val bottomAppBarFragment = BottomAppBarFragment.getInstance(
                         fragmentConfig = FragmentConfig(
+                                showFAB = true,
                                 fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
                         )
                 )
