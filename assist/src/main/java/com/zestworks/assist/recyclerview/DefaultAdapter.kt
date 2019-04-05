@@ -5,7 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.zestworks.assist.R
 
@@ -17,7 +16,7 @@ class DefaultAdapter(list: List<AdapterItem>, private val layoutID: Int = R.layo
         return DefaultHolder(view)
     }
 
-    inner class DefaultHolder(view: View) : RecyclerViewHolder<AdapterItem>(view) {
+    inner class DefaultHolder(view: View) : RecyclerViewHolder(view) {
 
         override fun onBindHolder(item: AdapterItem) {
             itemView.findViewById<TextView>(R.id.title).text = item.title
@@ -35,7 +34,9 @@ class DefaultAdapter(list: List<AdapterItem>, private val layoutID: Int = R.layo
                 imageUrl.resourcePath != null -> {
                     Picasso.get().load(imageUrl.resourcePath).into(imageView)
                 }
-                else -> null
+                else -> {
+
+                }
             }
         }
     }
