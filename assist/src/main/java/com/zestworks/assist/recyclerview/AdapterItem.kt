@@ -4,7 +4,7 @@ import java.io.File
 
 data class AdapterItem(
         val title: String = "",
-        val imageUrl: ImageURL
+        val imageUrl: ImageURL = ImageURL()
 )
 
 data class ImageURL(
