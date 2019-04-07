@@ -1,6 +1,7 @@
 package com.zestworks.android
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
@@ -55,10 +56,14 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 val bottomAppBarFragment = BottomAppBarFragmentBuilder()
-                        .setFabAlignmentMode(BottomAppBar.FAB_ALIGNMENT_MODE_CENTER)
-                        .setShowFab(true)
+                        .setFabAlignmentMode(BottomAppBar.FAB_ALIGNMENT_MODE_END)
+                        .requireFab(true)
                         .setRecyclerViewAdapter(defaultAdapter as RecyclerView.Adapter<*>)
                         .setRecyclerViewLayoutManager(LinearLayoutManager(this, RecyclerView.VERTICAL, false))
+                        .setFabIcon(R.drawable.ic_twotone_share)
+                        .setFabClickListener(View.OnClickListener {
+                            Toast.makeText(this@MainActivity, "Clicked on FAB", Toast.LENGTH_SHORT).show()
+                        })
                         .create()
 
                 supportFragmentManager.beginTransaction()

@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
+import androidx.annotation.DrawableRes
+import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomappbar.BottomAppBar
@@ -33,19 +35,9 @@ class BottomAppBarFragment : Fragment() {
     }
 
     private fun setupView() {
-        val floatingActionButton = view?.findViewById<FloatingActionButton>(R.id.fab)!!
-        floatingActionButton.apply {
-            if (fragmentConfig.showFAB) {
-                show()
-            } else {
-                hide()
-            }
-        }
+        setupFab()
 
-        val bottomAppBar = view?.findViewById<BottomAppBar>(R.id.bottomAppbar)!!
-        bottomAppBar.apply {
-            fabAlignmentMode = fragmentConfig.fabAlignmentMode
-        }
+        setupBottomAppBar()
 
         val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerView)!!
         recyclerView.apply {
@@ -59,6 +51,34 @@ class BottomAppBarFragment : Fragment() {
         }
     }
 
+    private fun setupFab() {
+        val floatingActionButton = view?.findViewById<FloatingActionButton>(R.id.fab)!!
+
+        if (fragmentConfig.fabIconDrawable != null) {
+            floatingActionButton.setImageResource(fragmentConfig.fabIconDrawable!!)
+        }
+
+        floatingActionButton.apply {
+            if (fragmentConfig.showFAB) {
+                show()
+            } else {
+                hide()
+            }
+        }
+
+        floatingActionButton.setOnClickListener(fragmentConfig.fabClickListener)
+    }
+
+    private fun setupBottomAppBar() {
+        val bottomAppBar = view?.findViewById<BottomAppBar>(R.id.bottomAppbar)!!
+        bottomAppBar.apply {
+            fabAlignmentMode = fragmentConfig.fabAlignmentMode
+
+            if (fragmentConfig.title != null) {
+                title = fragmentConfig.title
+            }
+        }
+    }
 
     internal fun updateFragmentConfig(newConfig: FragmentConfig) {
         if (name() != newConfig.fragmentTag) {
@@ -77,12 +97,17 @@ class BottomAppBarFragmentBuilder {
 
     private val fragmentConfig = FragmentConfig()
 
+    fun setTitle(title: String): BottomAppBarFragmentBuilder {
+        fragmentConfig.title = title
+        return this
+    }
+
     fun setFabAlignmentMode(@BottomAppBar.FabAlignmentMode fabAlignmentMode: Int): BottomAppBarFragmentBuilder {
         fragmentConfig.fabAlignmentMode = fabAlignmentMode
         return this
     }
 
-    fun setShowFab(showFAB: Boolean): BottomAppBarFragmentBuilder {
+    fun requireFab(showFAB: Boolean): BottomAppBarFragmentBuilder {
         fragmentConfig.showFAB = showFAB
         return this
     }
@@ -101,6 +126,16 @@ class BottomAppBarFragmentBuilder {
         return this
     }
 
+    fun setFabIcon(@DrawableRes drawableRes: Int): BottomAppBarFragmentBuilder {
+        fragmentConfig.fabIconDrawable = drawableRes
+        return this
+    }
+
+    fun setFabClickListener(@Nullable clickListener: View.OnClickListener): BottomAppBarFragmentBuilder {
+        fragmentConfig.fabClickListener = clickListener
+        return this
+    }
+
     fun create(): BottomAppBarFragment {
         val bottomAppBarFragment = BottomAppBarFragment()
         bottomAppBarFragment.fragmentConfig = fragmentConfig
@@ -109,6 +144,8 @@ class BottomAppBarFragmentBuilder {
 }
 
 internal data class FragmentConfig(
+        //Title to be displayed in the bottom app bar
+        var title: String? = null,
         //Show or hide Fab
         var showFAB: Boolean = true,
         //Fab Alignment mode - Center or End of the bottom app bar
@@ -119,6 +156,11 @@ internal data class FragmentConfig(
         //Adapter for RecyclerView
         var adapter: RecyclerView.Adapter<*>? = null,
         //Layout Manager for RecyclerView
-        var layoutManager: RecyclerView.LayoutManager? = null
+        var layoutManager: RecyclerView.LayoutManager? = null,
+        //Icon to be displayed in the FAB
+        @DrawableRes
+        var fabIconDrawable: Int? = null,
+        //Click listener for the Fab
+        var fabClickListener: View.OnClickListener? = null
 )
 
