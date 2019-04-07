@@ -1,6 +1,6 @@
 #RecyclerView Adapter
 
-![RecylerView](https://github.com/santhoshkumar2794/AndroidAssist/blob/master/screenshots/RecyclerView.png)
+<img src="https://github.com/santhoshkumar2794/AndroidAssist/blob/master/screenshots/RecyclerView.png" width="250"/>
 
 `RecyclerAdapter` is a wrapper above the default `RecyclerView.Adapter` which handles the layout inflation and binding the data to the view.
 
