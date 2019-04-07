@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         findViewById<RecyclerView>(R.id.itemRecyclerView).apply {
             layoutManager = GridLayoutManager(context, 2)
             val defaultAdapter = RecyclerAdapter(itemList = adapterItems)
-            defaultAdapter.adapterItemClickListener = object : RecyclerAdapter.AdapterClickListener<AdapterItem> {
+            defaultAdapter.adapterItemClickListener = object : RecyclerAdapter.AdapterClickListener {
                 override fun onItemClick(item: AdapterItem) {
                     openFragment(item)
                 }
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 val defaultAdapter = RecyclerAdapter(adapterItems)
-                defaultAdapter.adapterItemClickListener = object : RecyclerAdapter.AdapterClickListener<AdapterItem> {
+                defaultAdapter.adapterItemClickListener = object : RecyclerAdapter.AdapterClickListener {
                     override fun onItemClick(item: AdapterItem) {
                         Toast.makeText(this@MainActivity, "Clicked on ${item.title}", Toast.LENGTH_SHORT).show()
                     }

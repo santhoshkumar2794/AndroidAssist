@@ -15,7 +15,7 @@ class RecyclerAdapter(
 ) :
         RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder>() {
 
-    var adapterItemClickListener: AdapterClickListener<AdapterItem>? = null
+    var adapterItemClickListener: AdapterClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(layoutID, parent, false)
@@ -60,9 +60,9 @@ class RecyclerAdapter(
         }
     }
 
-    interface AdapterClickListener<T> {
-        fun onItemClick(item: T)
-        fun onItemLongClick(item: T)
+    interface AdapterClickListener {
+        fun onItemClick(item: AdapterItem)
+        fun onItemLongClick(item: AdapterItem)
     }
 }
 
