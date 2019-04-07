@@ -1,10 +1,10 @@
-#RecyclerView Adapter
+# RecyclerView Adapter
 
 <img src="https://github.com/santhoshkumar2794/AndroidAssist/blob/master/screenshots/RecyclerView.png" width="250"/>
 
 `RecyclerAdapter` is a wrapper above the default `RecyclerView.Adapter` which handles the layout inflation and binding the data to the view.
 
-##API Documentation
+## API Documentation
 
 The `RecyclerAdapter` accepts the `List<AdapterItem>`. The `AdapterItem` is a simple data class which holds the title and URL of the thumbnail to be shown.
 In addition, the the single and long click events on an item can be listened by using `AdapterItemClickListener`.
@@ -15,7 +15,7 @@ A typical way of setting the adapter looks something like this:
 adapter = RecyclerAdapter(itemList = adapterItems) 
 ```
 
-####AdapterItem
+### AdapterItem
 
 **Title** - the title of the thumbnail. Left-aligned, Medium, 14sp
 
@@ -42,7 +42,7 @@ AdapterItem("Title",ImageURL(url = "https://storage.googleapis.com/spec-host-bac
 ```
 
 
-####AdapterItemClickListener
+### AdapterItemClickListener
 
 When an item in the recycler view is clicked (single tap), informed via `onItemClick` and when long pressed it is notified via `onItemLongClick`.
 
